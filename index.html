@@ -169,7 +169,7 @@ document.getElementById('f').addEventListener('submit',async function(e){
 e.preventDefault();var f=e.target,d={name:f.n.value,email:f.e.value,service:f.s.value,phone:f.p.value,budget:f.b.value,timeline:f.t.value,message:f.m.value,at:new Date().toISOString()},ok=document.getElementById('ok'),saved=false;
 try{if(false){await db.collection('leads').doc('l'+Date.now()).set(d);saved=true}}catch(x){}
 if(saved){ok.textContent='Thanks! Thanks! Your requirements are saved. We will reply by email.';f.reset()}
-else{location.href='mailto:kivostudio.work@gmail.com?subject='+encodeURIComponent('Consultation: '+d.service)+'&body='+encodeURIComponent(d.name+'\n'+d.email+'\n'+d.phone+'\n'+d.budget+'\n'+d.timeline+'\n\n'+d.message);ok.textContent='Your email app is opening. Press send to submit your requirements.'}});
+else{location.href='mailto:kivostudio.work@gmail.com?subject='+encodeURIComponent('New request: '+d.service)+'&body='+encodeURIComponent('Name: '+d.name+'\nEmail: '+d.email+'\nPhone: '+(d.phone||'not given')+'\nService: '+d.service+'\n'+d.budget+'\n'+d.timeline+'\n\nRequirements:\n'+d.message);ok.textContent='Your email app is opening. Press send to submit your requirements.'}});
 })();
 </script>
 </body>

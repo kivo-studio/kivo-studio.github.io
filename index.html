@@ -164,11 +164,11 @@ document.querySelectorAll('.card').forEach(function(c){
 c.addEventListener('pointermove',function(e){if(e.pointerType!=='mouse')return;var b=c.getBoundingClientRect(),x=(e.clientX-b.left)/b.width-.5,y=(e.clientY-b.top)/b.height-.5;c.style.transform='rotateY('+x*10+'deg) rotateX('+-y*10+'deg) translateZ(6px)'});
 ['pointerleave','pointerup','pointercancel'].forEach(function(ev){c.addEventListener(ev,function(){c.style.transform=''})})});
 
-document.querySelectorAll('[data-svc]').forEach(function(b){b.addEventListener('click',function(){document.querySelector('#f select[name=s]').value=b.dataset.svc;location.hash='contact'})});
+document.querySelectorAll('[data-svc]').forEach(function(b){b.addEventListener('click',function(){document.querySelector('#f select[name=s]').value=b.dataset.svc;document.getElementById('contact').scrollIntoView({behavior:'smooth'})})});
 document.getElementById('f').addEventListener('submit',async function(e){
 e.preventDefault();var f=e.target,d={name:f.n.value,email:f.e.value,service:f.s.value,phone:f.p.value,budget:f.b.value,timeline:f.t.value,message:f.m.value,at:new Date().toISOString()},ok=document.getElementById('ok'),saved=false;
 try{if(false){await db.collection('leads').doc('l'+Date.now()).set(d);saved=true}}catch(x){}
-if(saved){ok.textContent='Thanks! Thanks! Your requirements are saved. We will reply by email.';f.reset()}
+if(saved){ok.textContent='Thanks! Your requirements are saved. We will reply by email.';f.reset()}
 else{location.href='mailto:kivostudio.work@gmail.com?subject='+encodeURIComponent('New request: '+d.service)+'&body='+encodeURIComponent('Name: '+d.name+'\nEmail: '+d.email+'\nPhone: '+(d.phone||'not given')+'\nService: '+d.service+'\n'+d.budget+'\n'+d.timeline+'\n\nRequirements:\n'+d.message);ok.textContent='Your email app is opening. Press send to submit your requirements.'}});
 })();
 </script>
